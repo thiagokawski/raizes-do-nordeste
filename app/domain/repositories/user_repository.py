@@ -8,3 +8,7 @@ class UserRepository(ABC):
     @abstractmethod
     def find_by_email(self, email: str) -> Optional[User]:
         pass
+
+    @abstractmethod
+    def find_by_id(self, id_user: int) -> Optional[User]:
+        pass

@@ -17,8 +17,8 @@ class JwtProvider:
         )
 
         payload.update({
-            "exp": expire,
-            "iat": now,
+            "exp": int(expire.timestamp()),
+            "iat": int(now.timestamp()),
             "type": "access",
         })
 
@@ -26,4 +26,11 @@ class JwtProvider:
             payload,
             security_settings.JWT_SECRET_KEY,
             algorithm=security_settings.JWT_ALGORITHM
+        )
+
+    def decode_access_token(self, token: str) -> dict[str, Any]:
+        return jwt.decode(
+            token,
+            security_settings.JWT_SECRET_KEY,
+            algorithms=[security_settings.JWT_ALGORITHM]
         )

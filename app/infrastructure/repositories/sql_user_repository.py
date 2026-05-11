@@ -28,3 +28,21 @@ class SqlUserRepository(UserRepository):
             password=user_model.password,
             active=user_model.active
         )
+
+    def find_by_id(self, id_user: int) -> Optional[User]:
+        user_model = (
+            self.db.query(UserModel)
+            .filter(UserModel.id_user == id_user)
+            .first()
+        )
+
+        if not user_model:
+            return None
+
+        return User(
+            id_user=user_model.id_user,
+            name=user_model.name,
+            email=user_model.email,
+            password=user_model.password,
+            active=user_model.active
+        )
