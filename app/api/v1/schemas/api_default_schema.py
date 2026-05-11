@@ -3,7 +3,6 @@ from pydantic import BaseModel, Field
 
 T1 = TypeVar("T1")
 
-
 class ResponseDefault(BaseModel, Generic[T1]):
     status: int = Field(default=200)
     message: str = Field(default="Sucesso")

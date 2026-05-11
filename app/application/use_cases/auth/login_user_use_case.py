@@ -1,10 +1,10 @@
-from fastapi import HTTPException, status
+from fastapi import status
 
 from app.domain.repositories.user_repository import UserRepository
+from app.core.handler.exception_app_exception import AppException
 from app.core.security.password_hasher import PasswordHasher
 from app.core.security.jwt_provider import JwtProvider
 from app.api.v1.schemas.auth_schema import LoginResponse
-
 
 class LoginUserUseCase:
 
@@ -22,15 +22,15 @@ class LoginUserUseCase:
         user = self.user_repository.find_by_email(email)
 
         if not user:
-            raise HTTPException(
+            raise AppException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Email ou senha inválidos"
+                message="Email ou senha inválidos"
             )
 
         if not user.active:
-            raise HTTPException(
+            raise AppException(
                 status_code=status.HTTP_403_FORBIDDEN,
-                detail="Usuário inativo"
+                message="Usuário inativo"
             )
 
         password_is_valid = self.password_hasher.verify(
@@ -39,9 +39,9 @@ class LoginUserUseCase:
         )
 
         if not password_is_valid:
-            raise HTTPException(
+            raise AppException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Email ou senha inválidos"
+                message="Email ou senha inválidos"
             )
 
         token = self.jwt_provider.create_access_token(
