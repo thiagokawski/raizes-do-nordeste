@@ -1,0 +1,13 @@
+from enum import Enum
+
+
+class StatusOrders(str, Enum):
+    AGUARDANDO_PAGAMENTO = "AGUARDANDO_PAGAMENTO"
+    EM_PREPARACAO = "EM_PREPARACAO"
+    EM_ROTA_ENTREGA = "EM_ROTA_ENTREGA"
+    PEDIDO_ENTREGUE = "PEDIDO_ENTREGUE"
+
+
+class PositionEmploy(str, Enum):
+    ATENDENTE = "ATENDENTE"
+    COZINHEIRO = "COZINHEIRO"

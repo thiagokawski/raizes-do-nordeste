@@ -22,3 +22,19 @@ class UserModel(Base):
         secondary=users_roles,
         back_populates="users"
     )
+    employee = relationship(
+        "EmployeeModel",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
+    orders = relationship(
+        "OrderModel",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
+    refresh_tokens = relationship(
+        "RefreshTokenModel",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
