@@ -16,9 +16,9 @@ router = APIRouter(
 
 @router.post("/login", response_model=ResponseDefault[LoginResponse])
 def login(
-        request: LoginRequest, 
-        db: Session = Depends(get_db)
-    ):    
+    request: LoginRequest, 
+    db: Session = Depends(get_db)
+):    
     use_case = LoginUserUseCase(
         user_repository=SqlUserRepository(db),
         password_hasher=PasswordHasher(),
@@ -26,7 +26,7 @@ def login(
     )
 
     return ResponseDefault.success(
-        data = use_case.execute(
+        data=use_case.execute(
             email=request.email,
             password=request.password
         ),

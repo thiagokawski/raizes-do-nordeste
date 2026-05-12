@@ -11,15 +11,6 @@ class SqlMenuRepository(MenuRepository):
     def __init__(self, db: Session):
         self.db = db
 
-    def find_all(self) -> list[Menu]:
-        menu_models = (
-            self.db.query(MenuModel)
-            .options(joinedload(MenuModel.items))
-            .all()
-        )
-
-        return [self._to_entity(menu_model) for menu_model in menu_models]
-
     def find_by_id_menu(self, id_menu: int) -> Optional[Menu]:
         menu_model = (
             self.db.query(MenuModel)
@@ -32,16 +23,6 @@ class SqlMenuRepository(MenuRepository):
             return None
 
         return self._to_entity(menu_model)
-
-    def find_by_id_company(self, id_company: int) -> list[Menu]:
-        menu_models = (
-            self.db.query(MenuModel)
-            .options(joinedload(MenuModel.items))
-            .filter(MenuModel.id_company == id_company)
-            .all()
-        )
-
-        return [self._to_entity(menu_model) for menu_model in menu_models]
 
     def _to_entity(self, menu_model: MenuModel) -> Menu:
         return Menu(

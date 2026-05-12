@@ -2,7 +2,7 @@ from sqlalchemy import Column, Enum as SQLEnum, ForeignKey, Integer, Numeric
 from sqlalchemy.orm import relationship
 
 from app.infrastructure.database.base import Base
-from app.infrastructure.database.models.enums import StatusOrders
+from app.infrastructure.database.models.enums import SourceOrders, StatusOrders
 
 
 class OrderModel(Base):
@@ -23,6 +23,11 @@ class OrderModel(Base):
         SQLEnum(StatusOrders, name="status_orders"),
         nullable=False,
         server_default=StatusOrders.AGUARDANDO_PAGAMENTO.value,
+    )
+    source = Column(
+        SQLEnum(SourceOrders, name="source_orders"),
+        nullable=False,
+        server_default=SourceOrders.APP.value,
     )
 
     user = relationship("UserModel", back_populates="orders")

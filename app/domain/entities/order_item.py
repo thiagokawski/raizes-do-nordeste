@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 @dataclass
-class Menu:
+class OrderItem:
     id_order_item: int
     id_order: int
     id_item: int

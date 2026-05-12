@@ -1,7 +1,7 @@
 from .address_model import AddressModel
 from .company_model import CompanyModel
 from .employee_model import EmployeeModel
-from .enums import PositionEmploy, StatusOrders
+from .enums import PositionEmploy, SourceOrders, StatusOrders
 from .menu_model import MenuModel
 from .menuitem_model import MenuItemModel
 from .order_model import OrderModel
@@ -23,6 +23,7 @@ __all__ = [
     "PositionEmploy",
     "RefreshTokenModel",
     "RoleModel",
+    "SourceOrders",
     "StatusOrders",
     "UserModel"
 ]
